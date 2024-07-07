@@ -13,4 +13,4 @@ def wound_assessment_relabel(text):
 
     date=parse_date(full_date)
 
-    return f'\n{date} [Signed] [REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
+    return f'{date} [Signed] [REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'

@@ -26,6 +26,7 @@ print(f"{PDFs}{bcolors.ENDC}",'\n');
 if not os.path.exists(f"{basePath}/output"):
     os.makedirs(f"{basePath}/output");
 print(f"{bcolors.BOLD}{bcolors.OKGREEN}Starting to relabel files...{bcolors.ENDC}")
+
 for pdf in PDFs:
     reader = PdfReader(f'{reportPath}/{pdf}')
 

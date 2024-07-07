@@ -14,4 +14,4 @@ def superbill_relabel(text):
     if "-" in patient:
         patient,location = patient.split("-");
 
-    return f'\n{date} [Signed] [Superbill]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
+    return f'{date} [Signed] [Superbill]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
