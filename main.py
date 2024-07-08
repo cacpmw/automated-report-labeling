@@ -27,7 +27,6 @@ def checkFolders():
     if not os.path.exists(f"{basePath}/output"):
         os.makedirs(f"{basePath}/output");
 
-start_time = time.time();
 reportPath = f"{os.path.expanduser('~')}/Reports/pdfs";
 basePath = f"{os.path.expanduser('~')}/Reports";
 print(f"{bcolors.BOLD}{bcolors.HEADER}Accessing files in {reportPath}");
@@ -47,6 +46,7 @@ print(f"{PDFs}{bcolors.ENDC}",'\n');
 print(f"{bcolors.BOLD}{bcolors.OKGREEN}Starting to relabel files...{bcolors.ENDC}")
 
 shouldAddSignedTag = getUserInput();
+start_time = time.time();
 
 for pdf in PDFs:
     reader = PdfReader(f'{reportPath}/{pdf}')
