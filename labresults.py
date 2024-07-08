@@ -1,7 +1,7 @@
 from utils import parse_date
 
 
-def lab_results_relabel(text):
+def lab_results_relabel(text, shouldAddSignedTag):
     procedure = "Lab Results";
     provider = text[6].split(":")[1];
     full_date = text[9].split(": ")[1]
@@ -13,4 +13,4 @@ def lab_results_relabel(text):
 
     date=parse_date(full_date)
 
-    return f'{date} [Signed] [REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
+    return f'{date} {f"[Signed] " if shouldAddSignedTag else ""}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'

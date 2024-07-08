@@ -3,7 +3,7 @@ import os;
 from utils import parse_date
 
 
-def superbill_relabel(text):
+def superbill_relabel(text,shouldAddSignedTag):
     procedure = "Superbill";
     provider = text[2].split(":")[1].strip();
     full_date = text[4].split(": ")[1].strip();
@@ -14,4 +14,4 @@ def superbill_relabel(text):
     if "-" in patient:
         patient,location = patient.split("-");
 
-    return f'{date} [Signed] [Superbill]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
+    return f'{date} {f"[Signed] " if shouldAddSignedTag else ""}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'

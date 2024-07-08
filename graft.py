@@ -1,7 +1,7 @@
 from utils import parse_date
 
 
-def graft_relabel(text):
+def graft_relabel(text, shouldAddSignedTag):
     procedure = "Graft";
     provider = text[5].split(":")[1];
     full_date = text[7].split(": ")[1]
@@ -13,4 +13,4 @@ def graft_relabel(text):
 
     date=parse_date(full_date)
 
-    return f'{date} [Signed] [REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
+    return f'{date} {f"[Signed] " if shouldAddSignedTag else ""}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'

@@ -1,7 +1,7 @@
 from utils import parse_date
 
 
-def debridement_relabel(text):
+def debridement_relabel(text, shouldAddSignedTag):
     procedure = "Debriedement";
     provider = text[10].split(":")[1];
     full_date = text[12].split(": ")[1]
@@ -13,4 +13,4 @@ def debridement_relabel(text):
 
     date=parse_date(full_date)
 
-    return f'{date} [Signed] [REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
+    return f'{date} {f"[Signed] " if shouldAddSignedTag else ""}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'

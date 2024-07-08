@@ -1,7 +1,7 @@
 from utils import parse_date
 
 
-def wound_care_order_relabel(text):
+def wound_care_order_relabel(text, shouldAddSignedTag):
     procedure = "Wound Care Order";
     provider = text[8].split(":")[1];
     full_date = text[11].split(": ")[1]
@@ -13,4 +13,4 @@ def wound_care_order_relabel(text):
 
     date=parse_date(full_date)
 
-    return f'{date} [Signed] [REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
+    return f'{date} {f"[Signed] " if shouldAddSignedTag else ""}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
