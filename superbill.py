@@ -12,6 +12,6 @@ def superbill_relabel(text,shouldAddSignedTag):
     date=parse_date(full_date)
 
     if "-" in patient:
-        patient,location = patient.split("-");
+        patient,location = patient.split(" - ");
 
     return f'{date} {f"[Signed] " if shouldAddSignedTag else ""}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'

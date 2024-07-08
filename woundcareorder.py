@@ -9,7 +9,7 @@ def wound_care_order_relabel(text, shouldAddSignedTag):
     location=None;
 
     if "-" in patient:
-        patient,location = patient.split("-");
+        patient,location = patient.split(" - ");
 
     date=parse_date(full_date)
 

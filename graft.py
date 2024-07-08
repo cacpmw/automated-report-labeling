@@ -8,8 +8,8 @@ def graft_relabel(text, shouldAddSignedTag):
     patient= text[9].split(":")[1]
     location=None;
 
-    if patient.__contains__("-"):
-        patient,location = patient.split("-");
+    if patient.__contains__(" - "):
+        patient,location = patient.split(" - ");
 
     date=parse_date(full_date)
 

@@ -9,7 +9,7 @@ def lab_results_relabel(text, shouldAddSignedTag):
     location=None;
 
     if "-" in patient:
-        patient,location = patient.split("-");
+        patient,location = patient.split(" - ");
 
     date=parse_date(full_date)
 
