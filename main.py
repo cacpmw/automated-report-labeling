@@ -3,7 +3,8 @@ import os;
 from utils import parse_date;
 from utils import bcolors;
 import shutil;
-import time
+import time;
+import sys;
 
 
 from woundassessment import wound_assessment_relabel;
@@ -37,7 +38,7 @@ PDFs = os.listdir(reportPath);
 number_of_files = len(PDFs);
 if number_of_files == 0:
     print(f"{bcolors.FAIL}No pdfs available to relabel.\nStopping execution...{bcolors.ENDC}");
-    exit();
+    sys.exit(0);
 
 print(f"Reading {number_of_files} files");
 print(f"{PDFs}{bcolors.ENDC}",'\n');
