@@ -39,3 +39,6 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+
+class errors:
+    INDEXERROR = f"{bcolors.FAIL}ERROR: The current file isn't in the correct format. Can't relabel this one.\nPlease replace it or remove it and relabel manually{bcolors.ENDC}"

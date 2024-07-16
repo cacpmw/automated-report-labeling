@@ -59,6 +59,8 @@ for pdf in PDFs:
     text=page.extract_text().splitlines();
     procedure_type = text[1]
     shouldAddSignedTag = isDocuSigned(text)
+    print(pdf);
+    
     match procedure_type :
         case 'Wound Assessment':
             label = wound_assessment_relabel(text, shouldAddSignedTag);

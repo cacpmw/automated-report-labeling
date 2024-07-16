@@ -1,10 +1,11 @@
 from pypdf import PdfReader
 import os;
 from utils import parse_date
+from utils import errors;
 
 
 def superbill_relabel(text,shouldAddSignedTag):
-    
+    try:
         procedure = "Superbill";
         provider = text[2].split(":")[1].strip();
         full_date = text[4].split(": ")[1].strip();
@@ -15,3 +16,6 @@ def superbill_relabel(text,shouldAddSignedTag):
             patient,location = patient.split(" - ");
 
         return f'{date} {f"[Signed] " if shouldAddSignedTag else "[Not Signed] "}[Superbill]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
+    except IndexError:
+        print(errors.INDEXERROR);
+        return ""
