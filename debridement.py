@@ -1,8 +1,10 @@
+""" Debridement Module"""
 from utils import parse_date
-from utils import errors
+from utils import Errors
 
 
-def debridement_relabel(text, shouldAddSignedTag):
+def debridement_relabel(text, should_add_signed_tag):
+    """Debridement relabel function"""
     try:
         procedure = "Debriedement"
         provider = text[10].split(":")[1]
@@ -15,7 +17,7 @@ def debridement_relabel(text, shouldAddSignedTag):
 
         date = parse_date(full_date)
 
-        return f'{date} {f"[Signed] " if shouldAddSignedTag else "[Not Signed] "}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
+        return f'{date} {"[Signed] " if should_add_signed_tag else "[Not Signed] "}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
     except IndexError:
-        print(errors.INDEXERROR)
+        print(Errors.INDEXERROR.value)
         return ""

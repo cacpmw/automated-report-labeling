@@ -1,8 +1,9 @@
 from utils import parse_date
-from utils import errors
+from utils import Errors
 
 
-def wound_assessment_relabel(text, shouldAddSignedTag):
+def wound_assessment_relabel(text, should_add_signed_tag):
+    """Wound assessment relabel function"""
     try:
         procedure = "Wound Assessment"
         provider = text[8].split(":")[1]
@@ -15,7 +16,7 @@ def wound_assessment_relabel(text, shouldAddSignedTag):
 
         date = parse_date(full_date)
 
-        return f'{date} {f"[Signed] " if shouldAddSignedTag else "[Not Signed] "}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
+        return f'{date} {"[Signed] " if should_add_signed_tag else "[Not Signed] "}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
     except IndexError:
-        print(errors.INDEXERROR)
+        print(Errors.INDEXERROR.value)
         return ""

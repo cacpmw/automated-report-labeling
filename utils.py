@@ -1,4 +1,8 @@
+""" Utility functions and classes """
+from enum import Enum
+
 def parse_date(string_date):
+    """Parse dates from a string"""
     date = ""
     splitted = string_date.split(" ")
     date += splitted[3] + "."
@@ -30,7 +34,9 @@ def parse_date(string_date):
     return date
 
 
-class bcolors:
+class BColors(Enum):
+    """Terminal colors"""
+
     HEADER = "\033[95m"
     OKBLUE = "\033[94m"
     OKCYAN = "\033[96m"
@@ -42,5 +48,7 @@ class bcolors:
     UNDERLINE = "\033[4m"
 
 
-class errors:
-    INDEXERROR = f"{bcolors.FAIL}ERROR: The current file isn't in the correct format. Can't relabel this one.\nPlease replace it or remove it and relabel manually{bcolors.ENDC}"
+class Errors(Enum):
+    """Exception messages"""
+
+    INDEXERROR = f"{BColors.FAIL.value}ERROR: The current file isn't in the correct format. Can't relabel this one.\nPlease replace it or remove it and relabel manually{BColors.ENDC.value}"
