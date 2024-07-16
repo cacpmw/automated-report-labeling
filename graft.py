@@ -8,9 +8,9 @@ def graft_relabel(text, shouldAddSignedTag):
     patient= text[9].split(":")[1]
     location=None;
 
-    if patient.__contains__(" - "):
+    if " - " in patient:
         patient,location = patient.split(" - ");
 
     date=parse_date(full_date)
 
-    return f'{date} {f"[Signed] " if shouldAddSignedTag else ""}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
+    return f'{date} {f"[Signed] " if shouldAddSignedTag else "[Not Signed] "}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'

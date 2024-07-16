@@ -6,7 +6,6 @@ import shutil;
 import time;
 import sys;
 
-
 from woundassessment import wound_assessment_relabel;
 from superbill import superbill_relabel;
 from graft import graft_relabel;
@@ -27,6 +26,12 @@ def checkFolders():
     if not os.path.exists(f"{basePath}/output"):
         os.makedirs(f"{basePath}/output");
 
+def isDocuSigned(text):
+    for line in text:
+        if "Docusign" in line:
+            return True;
+    return False;
+
 reportPath = f"{os.path.expanduser('~')}/Reports/pdfs";
 basePath = f"{os.path.expanduser('~')}/Reports";
 print(f"{bcolors.BOLD}{bcolors.HEADER}Accessing files in {reportPath}");
@@ -45,7 +50,6 @@ print(f"{PDFs}{bcolors.ENDC}",'\n');
 
 print(f"{bcolors.BOLD}{bcolors.OKGREEN}Starting to relabel files...{bcolors.ENDC}")
 
-shouldAddSignedTag = getUserInput();
 start_time = time.time();
 
 for pdf in PDFs:
@@ -54,7 +58,7 @@ for pdf in PDFs:
     page = reader.pages[0]
     text=page.extract_text().splitlines();
     procedure_type = text[1]
-    
+    shouldAddSignedTag = isDocuSigned(text)
     match procedure_type :
         case 'Wound Assessment':
             label = wound_assessment_relabel(text, shouldAddSignedTag);
@@ -84,6 +88,7 @@ for pdf in PDFs:
             label = wound_care_order_relabel(text,shouldAddSignedTag);
             print(f"{bcolors.OKBLUE}{label}{bcolors.ENDC}");            
             shutil.copy(f"{reportPath}/{pdf}",f"{basePath}/output/{label}")
+    print("\n")
 
 print(f"{bcolors.OKGREEN}--- {number_of_files} files relabeled in %s seconds ---{bcolors.ENDC}" % (time.time() - start_time));
 

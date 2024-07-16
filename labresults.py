@@ -13,4 +13,4 @@ def lab_results_relabel(text, shouldAddSignedTag):
 
     date=parse_date(full_date)
 
-    return f'{date} {f"[Signed] " if shouldAddSignedTag else ""}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
+    return f'{date} {f"[Signed] " if shouldAddSignedTag else "[Not Signed] "}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
