@@ -51,4 +51,4 @@ class BColors(Enum):
 class Errors(Enum):
     """Exception messages"""
 
-    INDEXERROR = f"{BColors.FAIL.value}ERROR: The current file isn't in the correct format. Can't relabel this one.\nPlease replace it or remove it and relabel manually{BColors.ENDC.value}"
+    EXCEPTION_MESSAGE = f"{BColors.FAIL.value}ERROR: The current file isn't in the correct format. Can't relabel this one.\nPlease replace it or remove it and relabel manually{BColors.ENDC.value}"

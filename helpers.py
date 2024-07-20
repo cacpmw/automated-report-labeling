@@ -24,6 +24,6 @@ def check_folders(base_path):
 def is_docusigned(data):
     """Check for docusign string"""
     for line in data:
-        if "Docusign" in line:
+        if "docusign"  in line.lower():
             return True
     return False

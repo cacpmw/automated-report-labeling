@@ -17,6 +17,6 @@ def wound_assessment_relabel(text, should_add_signed_tag):
         date = parse_date(full_date)
 
         return f'{date} {"[Signed] " if should_add_signed_tag else "[Not Signed] "}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
-    except IndexError:
-        print(Errors.INDEXERROR.value)
+    except Exception:
+        print(Errors.EXCEPTION_MESSAGE.value)
         return ""
