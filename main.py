@@ -17,13 +17,10 @@ from labresults import lab_results_relabel
 from amendnote import amend_note_relabel
 from woundcareorder import wound_care_order_relabel
 
-try:
 
-    report_path = f"{os.path.expanduser('~')}/Reports/pdfs"
-    base_path = f"{os.path.expanduser('~')}/Reports"
-except Exception:
-    print(Exception)
-    
+report_path = f"{os.path.expanduser('~')}/Reports/pdfs"
+base_path = f"{os.path.expanduser('~')}/Reports"
+
 print(f"{BColors.BOLD.value}{BColors.HEADER.value}Accessing files in {report_path}")
 
 check_folders(base_path)
@@ -47,7 +44,10 @@ print(
 start_time = time.time()
 
 for pdf in PDFs:
-    reader = PdfReader(f"{report_path}/{pdf}")
+    try:
+        reader = PdfReader(f"{report_path}/{pdf}")
+    except Exception:
+        print(Exception)
 
     page = reader.pages[0]
     text = page.extract_text().splitlines()
