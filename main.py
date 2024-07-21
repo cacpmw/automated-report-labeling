@@ -17,9 +17,13 @@ from labresults import lab_results_relabel
 from amendnote import amend_note_relabel
 from woundcareorder import wound_care_order_relabel
 
+try:
 
-report_path = f"{os.path.expanduser('~')}/Reports/pdfs"
-base_path = f"{os.path.expanduser('~')}/Reports"
+    report_path = f"{os.path.expanduser('~')}/Reports/pdfs"
+    base_path = f"{os.path.expanduser('~')}/Reports"
+except Exception:
+    print(Exception)
+    
 print(f"{BColors.BOLD.value}{BColors.HEADER.value}Accessing files in {report_path}")
 
 check_folders(base_path)
