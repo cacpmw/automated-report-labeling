@@ -6,6 +6,7 @@ import sys
 import os
 from pypdf import PdfReader
 from utils import BColors
+from sys import platform
 
 from helpers import check_folders, is_docusigned
 
@@ -21,9 +22,20 @@ from woundcareorder import wound_care_order_relabel
 report_path = f"{os.path.expanduser('~')}/Reports/pdfs"
 base_path = f"{os.path.expanduser('~')}/Reports"
 
-print(f"{BColors.BOLD.value}{BColors.HEADER.value}Accessing files in {report_path}")
+print(f"{BColors.BOLD.value}{BColors.HEADER.value}Accessing files in {report_path}{BColors.ENDC.value}")
 
 check_folders(base_path)
+
+if os.path.exists(f"{report_path}/.DS_store"):
+    try:
+        os.remove(f"{report_path}/.DS_store") # This file causes headaches on macs
+        print(f"{BColors.OKCYAN.value}.DS_Store removed{BColors.ENDC.value}") 
+    except Exception:
+        print(f"{BColors.OKCYAN.value}Couldn't delete .DS_Store file.{BColors.ENDC.value}") 
+
+
+else:
+  print(f"{BColors.OKCYAN.value}No .DS_Store file{BColors.ENDC.value}") 
 
 PDFs = os.listdir(report_path)
 number_of_files = len(PDFs)
@@ -33,7 +45,7 @@ if number_of_files == 0:
     )
     sys.exit(0)
 
-print(f"Reading {number_of_files} files")
+print(f"{BColors.HEADER.value}Reading {number_of_files} files")
 print(f"{PDFs}{BColors.ENDC.value}", "\n")
 
 
