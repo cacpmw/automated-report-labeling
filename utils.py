@@ -1,5 +1,7 @@
 """ Utility functions and classes """
 from enum import Enum
+import os
+
 
 def parse_date(string_date):
     """Parse dates from a string"""
@@ -52,3 +54,5 @@ class Errors(Enum):
     """Exception messages"""
 
     EXCEPTION_MESSAGE = f"{BColors.FAIL.value}ERROR: The current file isn't in the correct format. Can't relabel this one.\nPlease replace it or remove it and relabel manually{BColors.ENDC.value}"
+
+BASE_PATH = f"{os.path.expanduser('~')}/Reports"

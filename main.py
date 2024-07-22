@@ -55,7 +55,7 @@ print(
 
 start_time = time.time()
 
-for pdf in PDFs:
+for index, pdf in enumerate(PDFs):
     try:
         reader = PdfReader(f"{report_path}/{pdf}")
     except Exception:
@@ -69,31 +69,31 @@ for pdf in PDFs:
 
     match procedure_type:
         case "Wound Assessment":
-            label = wound_assessment_relabel(text, SHOULD_ADD_SIGNED_TAG)
+            label = wound_assessment_relabel(text, SHOULD_ADD_SIGNED_TAG, index)
             print(f"{BColors.OKBLUE.value}{label}{BColors.ENDC.value} {BColors.WARNING.value}| New file name{BColors.ENDC.value}")
             shutil.copy(f"{report_path}/{pdf}", f"{base_path}/output/{label}")
         case "SuperBill":
-            label = superbill_relabel(text, SHOULD_ADD_SIGNED_TAG)
+            label = superbill_relabel(text, SHOULD_ADD_SIGNED_TAG, index)
             print(f"{BColors.OKBLUE.value}{label}{BColors.ENDC.value} {BColors.WARNING.value}| New file name{BColors.ENDC.value}")
             shutil.copy(f"{report_path}/{pdf}", f"{base_path}/output/{label}")
         case "Graft Pr ocedur e":
-            label = graft_relabel(text, SHOULD_ADD_SIGNED_TAG)
+            label = graft_relabel(text, SHOULD_ADD_SIGNED_TAG,index)
             print(f"{BColors.OKBLUE.value}{label}{BColors.ENDC.value} {BColors.WARNING.value}| New file name{BColors.ENDC.value}")
             shutil.copy(f"{report_path}/{pdf}", f"{base_path}/output/{label}")
         case "Non-Selectiv e Sharp Debridement":
-            label = debridement_relabel(text, SHOULD_ADD_SIGNED_TAG)
+            label = debridement_relabel(text, SHOULD_ADD_SIGNED_TAG,index)
             print(f"{BColors.OKBLUE.value}{label}{BColors.ENDC.value} {BColors.WARNING.value}| New file name{BColors.ENDC.value}")
             shutil.copy(f"{report_path}/{pdf}", f"{base_path}/output/{label}")
         case "Lab W ork Results":
-            label = lab_results_relabel(text, SHOULD_ADD_SIGNED_TAG)
+            label = lab_results_relabel(text, SHOULD_ADD_SIGNED_TAG,index)
             print(f"{BColors.OKBLUE.value}{label}{BColors.ENDC.value} {BColors.WARNING.value}| New file name{BColors.ENDC.value}")
             shutil.copy(f"{report_path}/{pdf}", f"{base_path}/output/{label}")
         case "Amend Repor ts":
-            label = amend_note_relabel(text, SHOULD_ADD_SIGNED_TAG)
+            label = amend_note_relabel(text, SHOULD_ADD_SIGNED_TAG,index)
             print(f"{BColors.OKBLUE.value}{label}{BColors.ENDC.value} {BColors.WARNING.value}| New file name{BColors.ENDC.value}")
             shutil.copy(f"{report_path}/{pdf}", f"{base_path}/output/{label}")
         case "Wound Car e Order":
-            label = wound_care_order_relabel(text, SHOULD_ADD_SIGNED_TAG)
+            label = wound_care_order_relabel(text, SHOULD_ADD_SIGNED_TAG,index)
             print(f"{BColors.OKBLUE.value}{label}{BColors.ENDC.value} {BColors.WARNING.value}| New file name{BColors.ENDC.value}")
             shutil.copy(f"{report_path}/{pdf}", f"{base_path}/output/{label}")
     print("\n")

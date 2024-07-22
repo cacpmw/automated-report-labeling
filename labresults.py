@@ -2,9 +2,10 @@
 
 from utils import parse_date
 from utils import Errors
+import os
 
 
-def lab_results_relabel(text, should_add_signed_tag):
+def lab_results_relabel(text, should_add_signed_tag,index):
     """Lab Results relabel"""
 
     try:
@@ -18,8 +19,11 @@ def lab_results_relabel(text, should_add_signed_tag):
             patient, location = patient.split(" - ")
 
         date = parse_date(full_date)
-
-        return f'{date} {"[Signed] " if should_add_signed_tag else "[Not Signed] "}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
-    except Exception:
-        print(Errors.EXCEPTION_MESSAGE.value)
+        finalFileName = f'{date} {"[Signed] " if should_add_signed_tag else "[Not Signed] "}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
+        if os.path.exists(f"{BASE_PATH}/output/{finalFileName}"):
+            return f'{date} {"[Signed] " if should_add_signed_tag else "[Not Signed] "}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}-{index}.pdf'
+        return finalFileName
+    except Exception as e:
+        #print(Errors.EXCEPTION_MESSAGE.value)
+        print(e)
         return ""

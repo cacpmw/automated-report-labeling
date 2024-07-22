@@ -1,8 +1,9 @@
 from utils import parse_date
-from utils import Errors
+from utils import Errors, BASE_PATH
+import os
 
 
-def wound_care_order_relabel(text, shoud_add_signed_tag):
+def wound_care_order_relabel(text, shoud_add_signed_tag,index):
     """Wound care order relabel function"""
     # print(text)
     try:
@@ -17,8 +18,11 @@ def wound_care_order_relabel(text, shoud_add_signed_tag):
 
         date = parse_date(full_date)
         # print(date)
-
-        return f'{date} {"[Signed] " if shoud_add_signed_tag else "[Not Signed] "}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
-    except Exception:
-        print(Errors.EXCEPTION_MESSAGE.value)
+        finalFileName = f'{date} {"[Signed] " if shoud_add_signed_tag else "[Not Signed] "}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
+        if os.path.exists(f"{BASE_PATH}/output/{finalFileName}"):
+            return f'{date} {"[Signed] " if shoud_add_signed_tag else "[Not Signed] "}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}-{index}.pdf'
+        return finalFileName
+    except Exception as e:
+        #print(Errors.EXCEPTION_MESSAGE.value)
+        print(e)
         return ""
