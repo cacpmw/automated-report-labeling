@@ -23,7 +23,7 @@ def debridement_relabel(text, should_add_signed_tag,index):
         finalFileName = f'{date} {"[Signed] " if should_add_signed_tag else "[Not Signed] "}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
         
         if os.path.exists(f"{BASE_PATH}/output/{finalFileName}"):
-            return fileNameWithMilliseconds(date,should_add_signed_tag,location, provider,patient,procedure,index)
+            return fileNameWithMilliseconds(date,should_add_signed_tag,location, provider,patient,procedure,index,"REPORT")
 
         return finalFileName 
 

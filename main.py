@@ -8,7 +8,7 @@ from pypdf import PdfReader
 from utils import BColors
 from sys import platform
 
-from helpers import check_folders, is_docusigned
+from helpers import check_folders, is_docusigned, check_for_ds_store_file, shutdown_at_zero_files
 
 from woundassessment import wound_assessment_relabel
 from superbill import superbill_relabel
@@ -26,24 +26,11 @@ print(f"{BColors.BOLD.value}{BColors.HEADER.value}Accessing files in {report_pat
 
 check_folders(base_path)
 
-if os.path.exists(f"{report_path}/.DS_store"):
-    try:
-        os.remove(f"{report_path}/.DS_store") # This file causes headaches on macs
-        print(f"{BColors.OKCYAN.value}.DS_Store removed{BColors.ENDC.value}") 
-    except Exception:
-        print(f"{BColors.OKCYAN.value}Couldn't delete .DS_Store file.{BColors.ENDC.value}") 
-
-
-else:
-  print(f"{BColors.OKCYAN.value}No .DS_Store file{BColors.ENDC.value}") 
+check_for_ds_store_file(report_path)
 
 PDFs = os.listdir(report_path)
 number_of_files = len(PDFs)
-if number_of_files == 0:
-    print(
-        f"{BColors.FAIL.value}No pdfs available to relabel.\nStopping execution...{BColors.ENDC.value}"
-    )
-    sys.exit(0)
+shutdown_at_zero_files(number_of_files)
 
 print(f"{BColors.HEADER.value}Reading {number_of_files} files")
 print(f"{PDFs}{BColors.ENDC.value}", "\n")
