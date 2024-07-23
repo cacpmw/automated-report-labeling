@@ -38,5 +38,5 @@ def fileNameWithMilliseconds(date,should_add_signed_tag, location, provider, pat
             seconds = time.time()
             # Convert to milliseconds
             milliseconds = int(seconds * 1000)
-            return f'{date} {"[Signed] " if should_add_signed_tag else "[Not Signed] "}[Superbill]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}-{BColors.FAIL.value}{index}{milliseconds}{BColors.ENDC.value}.pdf'
+            return f'{date} {"[Signed] " if should_add_signed_tag else "[Not Signed] "}[Superbill]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}-{index}{milliseconds}.pdf'
       
