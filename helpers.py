@@ -1,6 +1,8 @@
 """Helper Module"""
 
 import os
+from utils import BColors
+import time
 
 
 def get_user_input():
@@ -27,3 +29,14 @@ def is_docusigned(data):
         if "docusign"  in line.lower():
             return True
     return False
+
+def print_general_exception(e):
+    """Print general exception"""
+    print(f"{BColors.FAIL.value}{e}{BColors.ENDC.value}")
+
+def fileNameWithMilliseconds(date,should_add_signed_tag, location, provider, patient, procedure, index):
+            seconds = time.time()
+            # Convert to milliseconds
+            milliseconds = int(seconds * 1000)
+            return f'{date} {"[Signed] " if should_add_signed_tag else "[Not Signed] "}[Superbill]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}-{BColors.FAIL.value}{index}{milliseconds}{BColors.ENDC.value}.pdf'
+      

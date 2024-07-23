@@ -3,6 +3,7 @@
 from utils import parse_date
 from utils import Errors
 import os
+from helpers import print_general_exception,fileNameWithMilliseconds
 
 
 def lab_results_relabel(text, should_add_signed_tag,index):
@@ -20,10 +21,12 @@ def lab_results_relabel(text, should_add_signed_tag,index):
 
         date = parse_date(full_date)
         finalFileName = f'{date} {"[Signed] " if should_add_signed_tag else "[Not Signed] "}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
+        
         if os.path.exists(f"{BASE_PATH}/output/{finalFileName}"):
-            return f'{date} {"[Signed] " if should_add_signed_tag else "[Not Signed] "}[REPORT]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}-{index}.pdf'
+            return fileNameWithMilliseconds(date,should_add_signed_tag,location, provider,patient,procedure,index)
+
         return finalFileName
+        
     except Exception as e:
-        #print(Errors.EXCEPTION_MESSAGE.value)
-        print(e)
+        print_general_exception
         return ""
