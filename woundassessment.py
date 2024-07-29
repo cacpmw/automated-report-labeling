@@ -2,12 +2,15 @@ from utils import parse_date
 from utils import Errors, BASE_PATH
 import os
 from helpers import print_general_exception, fileNameWithMilliseconds
+import pprint
 
 
 
 def wound_assessment_relabel(text, should_add_signed_tag,index):
     """Wound assessment relabel function"""
+    #print = pprint.pprint
     try:
+        #print(text)
         procedure = "Wound Assessment"
         provider = text[8].split(":")[1]
         full_date = text[10].split(": ")[1]

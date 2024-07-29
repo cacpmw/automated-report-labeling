@@ -4,6 +4,7 @@ import shutil
 import time
 import sys
 import os
+import pprint
 from pypdf import PdfReader
 from utils import BColors
 from sys import platform
@@ -19,7 +20,6 @@ from amendnote import amend_note_relabel
 from woundcareorder import wound_care_order_relabel
 
 def main():
-    
     report_path = f"{os.path.expanduser('~')}/Reports/pdfs"
     base_path = f"{os.path.expanduser('~')}/Reports"
 
@@ -53,6 +53,7 @@ def main():
         text = page.extract_text().splitlines()
         procedure_type = text[1]
         SHOULD_ADD_SIGNED_TAG = is_docusigned(text)
+        #pprint.pprint(text)
         print(f"{pdf} {BColors.WARNING.value}| Original file name{BColors.ENDC.value}") #prints the pdf filename
 
         match procedure_type:
@@ -68,7 +69,7 @@ def main():
                 label = graft_relabel(text, SHOULD_ADD_SIGNED_TAG,index)
                 print(f"{BColors.OKBLUE.value}{label}{BColors.ENDC.value} {BColors.WARNING.value}| New file name{BColors.ENDC.value}")
                 shutil.copy(f"{report_path}/{pdf}", f"{base_path}/output/{label}")
-            case "Non-Selectiv e Sharp Debridement":
+            case "Selectiv e Sharp Debridement":
                 label = debridement_relabel(text, SHOULD_ADD_SIGNED_TAG,index)
                 print(f"{BColors.OKBLUE.value}{label}{BColors.ENDC.value} {BColors.WARNING.value}| New file name{BColors.ENDC.value}")
                 shutil.copy(f"{report_path}/{pdf}", f"{base_path}/output/{label}")
@@ -91,4 +92,5 @@ def main():
         % (time.time() - start_time)
     )
 
-main()
+if __name__ == "__main__":
+    main()
