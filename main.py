@@ -18,6 +18,7 @@ from debridement import debridement_relabel
 from labresults import lab_results_relabel
 from amendnote import amend_note_relabel
 from woundcareorder import wound_care_order_relabel
+from woundcarespecialtysuperbill import wound_care_specialty_superbill_relabel
 
 def main():
     report_path = f"{os.path.expanduser('~')}/Reports/pdfs"
@@ -85,6 +86,10 @@ def main():
                 label = wound_care_order_relabel(text, SHOULD_ADD_SIGNED_TAG,index)
                 print(f"{BColors.OKBLUE.value}{label}{BColors.ENDC.value} {BColors.WARNING.value}| New file name{BColors.ENDC.value}")
                 shutil.copy(f"{report_path}/{pdf}", f"{base_path}/output/{label}")
+            case "Wound Car e Specialty Superbill":
+                label = wound_care_specialty_superbill_relabel(text,SHOULD_ADD_SIGNED_TAG,index)
+                print(f"{BColors.OKBLUE.value}{label}{BColors.ENDC.value} {BColors.WARNING.value}| New file name{BColors.ENDC.value}")
+
         print("\n")
 
     print(
