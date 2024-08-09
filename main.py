@@ -89,6 +89,8 @@ def main():
             case "Wound Car e Specialty Superbill":
                 label = wound_care_specialty_superbill_relabel(text,SHOULD_ADD_SIGNED_TAG,index)
                 print(f"{BColors.OKBLUE.value}{label}{BColors.ENDC.value} {BColors.WARNING.value}| New file name{BColors.ENDC.value}")
+                shutil.copy(f"{report_path}/{pdf}", f"{base_path}/output/{label}")
+
 
         print("\n")
 
