@@ -8,7 +8,7 @@ def wound_care_specialty_superbill_relabel(text, should_add_signed_tag,index):
     """Wound care specialty superbill relabel function"""
     # print(text)
     try:
-        procedure = "Wound Care Specialty Superbill"
+        procedure = "Superbill"
         provider = text[4].split(":")[1]
         full_date = text[6].split(": ")[1]
         patient = text[7].split(":")[1]
@@ -18,10 +18,10 @@ def wound_care_specialty_superbill_relabel(text, should_add_signed_tag,index):
             patient, location = patient.split(" - ")
         
         date = parse_date(full_date) 
-        finalFileName = f'{date} {"[Signed] " if should_add_signed_tag else "[Not Signed] "}[Specialty Superbill]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
+        finalFileName = f'{date} {"[Signed] " if should_add_signed_tag else "[Not Signed] "}[Superbill]{f" [{location.strip()}] " if location else " [Home] "}{provider.strip()} - {patient.strip()} - {procedure}.pdf'
         
         if os.path.exists(f"{BASE_PATH}/output/{finalFileName}"):
-            return fileNameWithMilliseconds(date,should_add_signed_tag,location, provider,patient,procedure,index,"Specialty Superbill")
+            return fileNameWithMilliseconds(date,should_add_signed_tag,location, provider,patient,procedure,index,"Superbill")
 
         return finalFileName
 

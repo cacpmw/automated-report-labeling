@@ -7,7 +7,7 @@ from helpers import print_general_exception, fileNameWithMilliseconds
 import time
 
 def superbill_relabel(text, should_add_signed_tag,index):
-    """Superbill relabel"""
+    """Superbill relabel - This is old"""
     try:
         procedure = "Superbill"
         provider = text[2].split(":")[1].strip()
