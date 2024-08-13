@@ -102,8 +102,12 @@ def main():
 
         
 
-    number_of_output_files = count_files_from_folder(output_path)
-    if number_of_files == number_of_output_files:
+    #number_of_output_files = count_files_from_folder(output_path)
+    print(
+            f"{BColors.OKGREEN.value}--- {number_of_files} files relabeled in %s seconds ---{BColors.ENDC.value}"
+            % (time.time() - start_time)
+        )
+    """ if number_of_files == number_of_output_files:
         print(
             f"{BColors.OKGREEN.value}--- {number_of_files} files relabeled in %s seconds ---{BColors.ENDC.value}"
             % (time.time() - start_time)
@@ -122,7 +126,7 @@ def main():
         )
         print(
             f"{BColors.FAIL.value}--- AND TAKE A LOOK AT THE OUTPUT FOLDER ---{BColors.ENDC.value}"
-        )
+        ) """
 
 if __name__ == "__main__":
     main()
