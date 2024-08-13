@@ -9,7 +9,7 @@ from pypdf import PdfReader
 from utils import BColors
 from sys import platform
 
-from helpers import check_folders, is_docusigned, check_for_ds_store_file, shutdown_at_zero_files
+from helpers import check_folders, is_docusigned, check_for_ds_store_file, shutdown_at_zero_files, count_files_from_folder
 
 from woundassessment import wound_assessment_relabel
 from superbill import superbill_relabel
@@ -23,6 +23,8 @@ from woundcarespecialtysuperbill import wound_care_specialty_superbill_relabel
 def main():
     report_path = f"{os.path.expanduser('~')}/Reports/pdfs"
     base_path = f"{os.path.expanduser('~')}/Reports"
+    output_path =f"{os.path.expanduser('~')}/Reports/output"
+
 
     print(f"{BColors.BOLD.value}{BColors.HEADER.value}Accessing files in {report_path}{BColors.ENDC.value}")
 
@@ -35,7 +37,7 @@ def main():
     shutdown_at_zero_files(number_of_files)
 
     print(f"{BColors.HEADER.value}Reading {number_of_files} files")
-    print(f"{PDFs}{BColors.ENDC.value}", "\n")
+    #print(f"{PDFs}{BColors.ENDC.value}", "\n")
 
 
     print(
@@ -98,10 +100,29 @@ def main():
 
         print("\n")
 
-    print(
-        f"{BColors.OKGREEN.value}--- {number_of_files} files relabeled in %s seconds ---{BColors.ENDC.value}"
-        % (time.time() - start_time)
-    )
+        
+
+    number_of_output_files = count_files_from_folder(output_path)
+    if number_of_files == number_of_output_files:
+        print(
+            f"{BColors.OKGREEN.value}--- {number_of_files} files relabeled in %s seconds ---{BColors.ENDC.value}"
+            % (time.time() - start_time)
+        )
+    else:
+        print(
+            f"{BColors.OKGREEN.value}--- {number_of_output_files} of {number_of_files} files relabeled in %s seconds ---{BColors.ENDC.value}"
+            % (time.time() - start_time)
+        )
+        number_of_files_not_relabeled = number_of_files - number_of_output_files
+        print(
+            f"{BColors.FAIL.value}--- {number_of_files_not_relabeled} HAVE NOT BEEN RELABELED ---{BColors.ENDC.value}"
+        )
+        print(
+            f"{BColors.FAIL.value}--- PLEASE SCROLL UP TO SEE THE LOGS ---{BColors.ENDC.value}"
+        )
+        print(
+            f"{BColors.FAIL.value}--- AND TAKE A LOOK AT THE OUTPUT FOLDER ---{BColors.ENDC.value}"
+        )
 
 if __name__ == "__main__":
     main()
